@@ -1,0 +1,21 @@
+{
+	"key.elytratime.show": "残り時間を表示",
+	"key.elytratime.config": "設定メニューを開く",
+	"category.elytratime.controls": "Elytra Time",
+	"message.elytratime.no_elytra": "エリトラを装備していません！",
+	"value.elytratime.tooltip_format": "[TIME] 残り（[%]%）",
+	"value.elytratime.time_format": "[M]分 [S]秒",
+	"value.elytratime.time_report_format": "飛行可能時間の残り: [TIME]（[%]%）",
+	"title.elytratime.config": "Elytra Time",
+	"category.elytratime.general": "一般",
+	"option.elytratime.tooltip_format": "ツールチップ表示形式",
+	"option.elytratime.enable_tooltip": "ツールチップを有効化",
+	"option.elytratime.alert_threshold": "警告しきい値",
+	"option.elytratime.time_format": "時間表示形式",
+	"option.elytratime.time_report_format": "チャット表示形式",
+	"tooltip.elytratime.tooltip_format": "ツールチップの表示形式\n\n§n変数§r\n§l[TIME]§r: 残り時間\n§l[%]§r: 耐久値の残りパーセンテージ",
+	"tooltip.elytratime.enabled": "ツールチップの表示／非表示を切り替える",
+	"tooltip.elytratime.alert_threshold": "この耐久値%を下回るとプレイヤーに警告する",
+	"tooltip.elytratime.time_format": "時間の表示形式\n\n§n変数§r\n§l[M]§r: 分\n§l[S]§r: 秒",
+	"tooltip.elytratime.time_report_format": "チャットに表示される時間レポートの形式\n\n§n変数§r\n§l[TIME]§r: 残り時間\n§l[%]§r: 耐久値の残りパーセンテージ"
+}

@@ -7,10 +7,13 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.item.ElytraItem;
+import net.minecraft.item.Items;
+import net.minecraft.item.Items.*;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
+
 
 public class ElytraTimeClient implements ClientModInitializer {
     @Override
@@ -21,19 +24,22 @@ public class ElytraTimeClient implements ClientModInitializer {
         ElytraTime.LOGGER.info("Initialised on client");
     }
 
+    private static final KeyBinding.Category ELYTRA_CATEGORY =
+        KeyBinding.Category.create(Identifier.of("elytratime", "controls"));
+
     private void registerKeybindings() {
         KeyBinding printTime = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.elytratime.show",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_F4,
-                "category.elytratime.controls"
+                ELYTRA_CATEGORY
         ));
 
         KeyBinding openConfig = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.elytratime.config",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_O,
-                "category.elytratime.controls"
+                ELYTRA_CATEGORY
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -43,9 +49,9 @@ public class ElytraTimeClient implements ClientModInitializer {
                 if (found.isPresent())
                     client.player.sendMessage(Text.literal(
                             Util.formatTimePercent(found.get(),ClientTextUtils.getTimeReportFormat(), ClientTextUtils.getTimeFormat(), MinecraftClient.getInstance().world))
-                            .formatted(Formatting.GREEN));
+                            .formatted(Formatting.GREEN),false);
                 else
-                    client.player.sendMessage(Text.translatable("message.elytratime.no_elytra").formatted(Formatting.RED));
+                    client.player.sendMessage(Text.translatable("message.elytratime.no_elytra").formatted(Formatting.RED),false);
             }
 
             if (openConfig.wasPressed()) {
@@ -56,7 +62,7 @@ public class ElytraTimeClient implements ClientModInitializer {
 
     private static void registerEvents() {
         ItemTooltipCallback.EVENT.register((itemStack, context, type, lines) -> {
-            if (itemStack.getItem() instanceof ElytraItem && ElytraTime.config.tooltipEnabled) {
+            if (itemStack.isOf(Items.ELYTRA) && ElytraTime.config.tooltipEnabled) {
                 lines.add(1, Text.literal(
                         Util.formatTimePercent(itemStack, ClientTextUtils.getTooltipFormat(), ClientTextUtils.getTimeFormat(), MinecraftClient.getInstance().world))
                         .formatted(Formatting.GREEN));

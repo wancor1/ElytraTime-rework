@@ -4,7 +4,7 @@ import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ElytraItem;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -27,9 +27,8 @@ public class Util {
     }
 
     public static Optional<ItemStack> findElytra(PlayerEntity player) {
-        ItemStack chestPlate = player.getInventory().getArmorStack(EquipmentSlot.CHEST.getEntitySlotId());
-
-        if (chestPlate.getItem() instanceof ElytraItem) {
+        ItemStack chestPlate = player.getEquippedStack(EquipmentSlot.CHEST);
+        if (chestPlate.isOf(Items.ELYTRA)) {
             return Optional.of(chestPlate);
         }
 
@@ -37,7 +36,7 @@ public class Util {
             var found = TrinketsApi.getTrinketComponent(player).flatMap(trinketComponent -> {
                 for (var entry : trinketComponent.getAllEquipped()) {
                     ItemStack itemStack = entry.getRight();
-                    if (itemStack.getItem() instanceof ElytraItem) {
+                    if (itemStack.isOf(Items.ELYTRA)) {
                         return Optional.of(itemStack);
                     }
                 }

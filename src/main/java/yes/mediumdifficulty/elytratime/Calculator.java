@@ -24,7 +24,7 @@ public class Calculator {
 
     private static int getUnbreakingLevel(ItemStack item, World world) {
         // Worst thing about the 1.21 update tbh
-        RegistryEntry<Enchantment> entry = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(Enchantments.UNBREAKING).orElseThrow();
+        RegistryEntry<Enchantment> entry = world.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.UNBREAKING);
         return EnchantmentHelper.getLevel(entry, item);
     }
 }
